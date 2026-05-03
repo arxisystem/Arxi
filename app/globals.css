@@ -1,26 +1,176 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Brand palette: 暖米白 / 暖墨色，仍是單色系，但灰譜帶棕底 */
+  --color-paper: #f5efe2;
+  --color-page: #fbf8f1;
+  --color-ink: #1f1810;
+  --color-ink-muted: #7a6e5e;
+  --color-ink-soft: #a89a85;
+  --color-rule: #d8cfb8;
+
+  /* Fonts: Noto Serif TC for body, Noto Sans TC for nav/UI */
+  --font-serif: var(--font-noto-serif-tc), "Noto Serif TC", "Songti TC",
+    "PingFang TC", serif;
+  --font-sans: var(--font-noto-sans-tc), "Noto Sans TC", "PingFang TC",
+    "Heiti TC", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--color-paper);
+  color: var(--color-ink);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-paper);
+  /* 微微的紙纖維紋理——疊在背景上，視覺上脫離螢幕的平面感 */
+  background-image: url("/paper-texture.svg");
+  background-repeat: repeat;
+  background-blend-mode: multiply;
+  color: var(--color-ink);
+  font-family: var(--font-serif);
+  letter-spacing: 0.02em;
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings：weight 600 給予墨色更有重量感的存在 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+/* 預設連結：底線、不加色 */
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+/* ─────────────────────────────────────────────
+   .prose — Ghost HTML 文章內容排版
+   讀者長文閱讀區的 typography
+   ───────────────────────────────────────────── */
+.prose {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  line-height: 1.95;
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+}
+
+.prose > * + * {
+  margin-top: 1.5em;
+}
+
+.prose h2 {
+  font-size: 1.6rem;
+  margin-top: 2.5em;
+  margin-bottom: 0.6em;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
+
+.prose h3 {
+  font-size: 1.25rem;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  font-weight: 500;
+}
+
+.prose p {
+  margin-top: 1.4em;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+.prose a:hover {
+  color: var(--color-ink-muted);
+}
+
+.prose blockquote {
+  border-left: 2px solid var(--color-rule);
+  padding-left: 1.5em;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  font-style: italic;
+  color: var(--color-ink-muted);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.5em;
+  margin-top: 1.4em;
+}
+
+.prose ul {
+  list-style: disc;
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose li {
+  margin-top: 0.5em;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--color-rule);
+  margin: 3em auto;
+  width: 4rem;
+}
+
+.prose figure {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+.prose figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.prose figcaption {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+  text-align: center;
+  margin-top: 0.75em;
+  letter-spacing: 0.05em;
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+}
+
+.prose strong {
+  font-weight: 600;
+}
+
+.prose em {
+  font-style: italic;
+}
+
+.prose code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+  font-size: 0.9em;
+  background: var(--color-rule);
+  padding: 0.1em 0.4em;
+  border-radius: 2px;
 }
