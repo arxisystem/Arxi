@@ -16,43 +16,52 @@
     "Heiti TC", sans-serif;
 }
 
-html {
-  background: var(--color-paper);
-  color: var(--color-ink);
-}
+/*
+ * 全域 base 樣式必須包在 @layer base 裡面——
+ * 不然會比 Tailwind utilities (@layer utilities) 優先級高，
+ * 把 text-paper / text-ink-muted 等 className 全部蓋掉
+ */
+@layer base {
+  html {
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
 
-body {
-  background-color: var(--color-paper);
-  /* 微微的紙纖維紋理——疊在背景上，視覺上脫離螢幕的平面感 */
-  background-image: url("/paper-texture.svg");
-  background-repeat: repeat;
-  background-blend-mode: multiply;
-  color: var(--color-ink);
-  font-family: var(--font-serif);
-  letter-spacing: 0.02em;
-  line-height: 1.85;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  body {
+    background-color: var(--color-paper);
+    /* 微微的紙纖維紋理 */
+    background-image: url("/paper-texture.svg");
+    background-repeat: repeat;
+    background-blend-mode: multiply;
+    color: var(--color-ink);
+    font-family: var(--font-serif);
+    letter-spacing: 0.02em;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-/* Headings：weight 600 給予墨色更有重量感的存在 */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-serif);
-  letter-spacing: 0.01em;
-  line-height: 1.4;
-  font-weight: 600;
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-serif);
+    letter-spacing: 0.01em;
+    line-height: 1.4;
+    font-weight: 600;
+  }
 
-/* 預設連結：底線、不加色 */
-a {
-  color: inherit;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
+  /*
+   * 連結：只設底線細節，不設 color——
+   * Tailwind preflight 已經把 <a> 設 color: inherit、
+   * 我們的 text-* utilities 才能正確套用
+   */
+  a {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
 }
 
 /* ─────────────────────────────────────────────

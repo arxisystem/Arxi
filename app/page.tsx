@@ -81,17 +81,17 @@ export default async function Home() {
         </section>
       )}
 
-      {/* ── 關於創辦人 ── */}
+      {/* ── 關於我 ── */}
       <section className="px-6 py-32 border-t border-rule">
         <div className="mx-auto max-w-2xl">
           <p className="font-sans text-xs tracking-[0.3em] text-ink-soft uppercase mb-10">
-            關於創辦人
+            關於我
           </p>
           <p className="text-lg leading-loose">
-            台大數學、巴黎音樂院到中醫學系，張曦昀走過各種知識體系，在追尋真理的過程中，轉而向內——發現身體與情緒底下，藏著他一直在找的答案。
+            從台大數學、巴黎音樂院到中醫學系，我走過各種知識體系。在追尋真理的過程中，我轉而向內——發現身體與情緒底下，藏著一直在找的答案。
           </p>
           <p className="mt-6 text-lg leading-loose text-ink-muted">
-            投入身心整合工作五年，他的工作室，是他自己走過那條路之後，為你留下的入口。
+            投入身心整合工作五年，這個工作室，是我走過那條路之後，為你留下的入口。
           </p>
           <Link
             href="/about"
