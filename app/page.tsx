@@ -49,11 +49,13 @@ export default async function Home() {
             太曦是什麼
           </p>
           <p className="text-lg leading-loose">
-            太曦是一個以呼吸為核心的身心整合空間。
+            太曦是一個以呼吸為核心的身心整合品牌。
           </p>
-          <p className="mt-6 text-lg leading-loose text-ink-muted">
-            我們相信，真正的安全感不來自放鬆，而來自身體重新找回力量。透過徒手調整呼吸，整合身體的結構、神經與情緒——這裡，是你重新認識自己的起點。
-          </p>
+          <div className="mt-6 text-lg leading-loose text-ink-muted space-y-2">
+            <p>我相信，真正帶來安全感的不是放鬆，而是尚未喚醒的原始力量。</p>
+            <p>透過徒手調整呼吸，喚醒身體本有的機能，心靈隨之轉化。</p>
+            <p>——這裡，是你重新認識自己的起點。</p>
+          </div>
         </div>
       </section>
 
@@ -87,11 +89,13 @@ export default async function Home() {
           <p className="font-sans text-xs tracking-[0.3em] text-ink-soft uppercase mb-10">
             關於我
           </p>
-          <p className="text-lg leading-loose">
-            從台大數學、巴黎音樂院到中醫學系，我走過各種知識體系。在追尋真理的過程中，我轉而向內——發現身體與情緒底下，藏著一直在找的答案。
-          </p>
+          <div className="text-lg leading-loose space-y-2">
+            <p>台大數學、巴黎音樂院、後中醫學系</p>
+            <p>去過各式各樣的領域，我追問的始終是同一件事。</p>
+            <p>在這過程中，我轉而向內——發現身體與情緒底下，藏著一直在找的答案。</p>
+          </div>
           <p className="mt-6 text-lg leading-loose text-ink-muted">
-            投入身心整合工作五年，這個工作室，是我走過那條路之後，為你留下的入口。
+            投入身心整合工作五年，太曦，是我走過那條路之後，邀請你一同啟程的起點。
           </p>
           <Link
             href="/about"
@@ -106,12 +110,16 @@ export default async function Home() {
       <section className="px-6 py-32 border-t border-rule">
         <div className="mx-auto max-w-2xl text-center">
           <p className="font-sans text-xs tracking-[0.3em] text-ink-soft uppercase mb-10">
-            如果你準備好了
+            如果你準備好了...
           </p>
           <p className="text-lg leading-loose mb-12">
-            預約一次徒手呼吸調整。
-            <br />
-            一對一、安靜、慢。
+            這是一對一的過程
+            <br /><br />
+            有對話，有覺察，有探索。
+            <br /><br />
+            可能會有不適，可能會有挑戰。
+            <br /><br />
+            但那往往是身體開始說話的時候——你聽到了嗎？
           </p>
           <TrackedLink
             href={LINE_BOOK_URL}
@@ -120,6 +128,7 @@ export default async function Home() {
           >
             預約初次諮詢
           </TrackedLink>
+
         </div>
       </section>
     </>

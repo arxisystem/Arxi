@@ -12,24 +12,24 @@ export const metadata: Metadata = {
 
 const sections = [
   {
-    label: "起點",
-    body: "從數學到音樂，再到身體——這條路，從外面看起來不連貫，但對我來說，每一步都在找同一件事：世界的真理，以及我在其中的位置。",
+    label: "追問",
+    body: "我很早就感覺到，世界有兩面\n——外在環境發生的一切，以及內在心理所感受的風景。\n數學與音樂，就恰好象徵著我對這兩面的追尋。\n\n數學精美和諧的結構，回應了我對世界運行機制的好奇。\n音樂深刻動人的共鳴，承接了我表達內心情感的渴望。\n\n但我追問的始終是同一件事：世界的真理，以及我與它的關係。",
   },
   {
-    label: "轉折",
-    body: "台大數學系畢業後，我進入巴黎 Rueil-Malmaison 音樂院深造，在音符與結構裡繼續追問。但真正讓我停下來的，是某一天我開始注意到自己的身體——那些情緒與行為模式底下，潛藏著我從未看見的創傷與人格。那是我人生的轉折點。",
+    label: "發現",
+    body: "當身體的力量被喚醒，心靈也會隨之升起。\n當心靈受到衝擊，身體也會一同坍塌。\n\n那些人們以為是「個性」或「命運」導致的遭遇，背後都有更深的模式。\n那些人們以為是「習慣」或「不幸」造成的病痛，其中也有隱藏的機轉。\n\n身體的感覺、情緒的走向、行為的重複\n——它們不是隨機的，那是身體說話的方式。\n\n頓悟到這件事的那一刻，我感覺到氣息開始流動了。\n\n身體與心靈，從來不是分開的。\n往內看見自己的同時，也就看見了世界。\n於是我毅然決然踏進醫學的領域。",
   },
   {
-    label: "方法論",
-    body: "我開始系統性地學習：Be Activated、Body-Mind Centering、Somatic Experiencing、Applied Kinesiology、Internal Family System，目前就讀中國醫藥大學後中醫學系三年級。五年的身心整合工作，每一個個案都在加深我對「身體知道答案」這件事的信念。",
+    label: "入口",
+    body: "呼吸，是轉化這一切的入口。\n藉由徒手的調整，讓呼吸開始運轉，\n喚醒身體機能，解除長年卡住的模式。\n\n當身體的重新獲得力量，結構才得以平衡，\n神經系統變的安全，情緒也會找到它的出口。",
   },
   {
-    label: "核心哲學",
-    body: "太曦的核心，是呼吸。不是冥想式的放鬆，而是透過徒手的方式，調整呼吸的結構與動力，整合中醫陰陽與神經肌筋膜系統，讓身心重回它原本該有的狀態。我相信，安全感不是被給予的——它是身體重新找回力量之後，自然升起的。",
+    label: "相信",
+    body: "身體本來就知道它原本的狀態。\n而我要做的，只是幫助你、陪伴你找回來。\n\n我相信身心有極強大的潛能。\n我也相信，最終的答案在自己身上。\n\n安全感、力量，從來不是源於外在的\n——你早已擁有，只是還沒被喚醒。",
   },
   {
-    label: "邀請",
-    body: "我走過這條路，然後為準備好的人留下入口。太曦不是給所有人的——是給那些對身體感到好奇、願意用新的角度重新看見自己的人。如果你在這裡停下來，也許，你已經準備好了。",
+    label: "啟程",
+    body: "太曦邀請你一起從更深的角度認識自己。\n不管你帶著什麼故事來，這裡都接納你。\n只要你準備好了，我們就一起啟程。",
   },
 ];
 
@@ -67,7 +67,7 @@ export default function About() {
             <h2 className="font-sans text-xs tracking-[0.3em] text-ink-soft uppercase mb-5">
               {section.label}
             </h2>
-            <p className="text-lg leading-loose">{section.body}</p>
+            <p className="text-lg leading-loose whitespace-pre-line">{section.body}</p>
           </section>
         ))}
       </div>
@@ -90,7 +90,7 @@ export default function About() {
             <h2 className="font-sans text-xs tracking-[0.3em] text-ink-soft uppercase mb-5">
               {section.label}
             </h2>
-            <p className="text-lg leading-loose">{section.body}</p>
+            <p className="text-lg leading-loose whitespace-pre-line">{section.body}</p>
           </section>
         ))}
       </div>
