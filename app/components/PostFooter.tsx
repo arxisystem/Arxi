@@ -16,7 +16,7 @@ const SECTION_LABEL: Record<PostFooterProps["section"], string> = {
 /**
  * 文章 / 教學文章底部統一 footer。
  *
- * 主動作：「這篇有觸動你？來聊聊 →」LINE 聊天入口。
+ * 主動作：「有話想說嗎？來聊聊 →」LINE 聊天入口。
  * 次動作：訂閱、回列表。
  */
 export function PostFooter({ section }: PostFooterProps) {
@@ -29,7 +29,7 @@ export function PostFooter({ section }: PostFooterProps) {
           event="line_chat_click"
           className="inline-block font-sans text-sm tracking-[0.25em] bg-ink text-paper px-10 py-4 hover:opacity-85 transition-opacity"
         >
-          這篇有觸動你？來聊聊 →
+          有話想說嗎？來聊聊 →
         </TrackedLink>
       </div>
 
