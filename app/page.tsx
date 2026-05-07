@@ -59,6 +59,29 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* ── 關於我 ── */}
+      <section className="px-6 py-32 border-t border-rule">
+        <div className="mx-auto max-w-2xl">
+          <p className="font-sans text-xs tracking-[0.3em] text-ink-soft uppercase mb-10">
+            關於我
+          </p>
+          <div className="text-lg leading-loose space-y-2">
+            <p>台大數學、巴黎音樂院、後中醫學系</p>
+            <p>去過各式各樣的領域，我追問的始終是同一件事。</p>
+            <p>在這過程中，我轉而向內——發現身體與情緒底下，藏著一直在找的答案。</p>
+          </div>
+          <p className="mt-6 text-lg leading-loose text-ink-muted">
+            投入身心整合工作五年，太曦，是我走過那條路之後，邀請你一同啟程的起點。
+          </p>
+          <Link
+            href="/about"
+            className="inline-block mt-10 font-sans text-xs tracking-[0.3em] uppercase text-ink-muted hover:text-ink transition-colors border-b border-rule pb-1"
+          >
+            完整故事
+          </Link>
+        </div>
+      </section>
+
       {/* ── 最新文章 ── */}
       {latestPosts.length > 0 && (
         <section className="px-6 py-32 border-t border-rule">
@@ -82,29 +105,6 @@ export default async function Home() {
           </div>
         </section>
       )}
-
-      {/* ── 關於我 ── */}
-      <section className="px-6 py-32 border-t border-rule">
-        <div className="mx-auto max-w-2xl">
-          <p className="font-sans text-xs tracking-[0.3em] text-ink-soft uppercase mb-10">
-            關於我
-          </p>
-          <div className="text-lg leading-loose space-y-2">
-            <p>台大數學、巴黎音樂院、後中醫學系</p>
-            <p>去過各式各樣的領域，我追問的始終是同一件事。</p>
-            <p>在這過程中，我轉而向內——發現身體與情緒底下，藏著一直在找的答案。</p>
-          </div>
-          <p className="mt-6 text-lg leading-loose text-ink-muted">
-            投入身心整合工作五年，太曦，是我走過那條路之後，邀請你一同啟程的起點。
-          </p>
-          <Link
-            href="/about"
-            className="inline-block mt-10 font-sans text-xs tracking-[0.3em] uppercase text-ink-muted hover:text-ink transition-colors border-b border-rule pb-1"
-          >
-            完整故事
-          </Link>
-        </div>
-      </section>
 
       {/* ── 預約入口 ── */}
       <section className="px-6 py-32 border-t border-rule">
