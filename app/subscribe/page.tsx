@@ -5,6 +5,13 @@ export const metadata: Metadata = {
   title: "訂閱",
   description:
     "當有東西真正值得說的時候，你才會收到一封信——關於呼吸、身體、身心的連結。",
+  alternates: { canonical: "/subscribe" },
+  openGraph: {
+    title: "訂閱",
+    description:
+      "當有東西真正值得說的時候，你才會收到一封信——關於呼吸、身體、身心的連結。",
+    url: "/subscribe",
+  },
 };
 
 const willGet = [
@@ -17,7 +24,7 @@ export default function SubscribePage() {
   return (
     <div className="mx-auto max-w-xl px-6 py-32">
       <header className="mb-16">
-        <p className="font-sans text-xs tracking-[0.3em] text-ink-soft uppercase">
+        <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase">
           訂閱
         </p>
         <h1 className="mt-6 text-4xl tracking-[0.1em] leading-snug">
@@ -35,7 +42,7 @@ export default function SubscribePage() {
       </div>
 
       <section className="mt-16 pt-12 border-t border-rule">
-        <p className="font-sans text-xs tracking-[0.3em] text-ink-soft uppercase mb-8">
+        <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase mb-8">
           你會收到
         </p>
         <ul className="space-y-5">

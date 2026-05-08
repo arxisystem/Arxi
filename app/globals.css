@@ -21,6 +21,17 @@
  * 不然會比 Tailwind utilities (@layer utilities) 優先級高，
  * 把 text-paper / text-ink-muted 等 className 全部蓋掉
  */
+@layer utilities {
+  /* 橫向滑動容器藏 scrollbar——保留滑動功能，僅視覺上不顯示 */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @layer base {
   html {
     background: var(--color-paper);

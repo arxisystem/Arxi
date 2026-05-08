@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getPosts } from "@/lib/ghost";
+import { voices } from "@/lib/voices";
 import { PostCard } from "./components/PostCard";
 import { TrackedLink } from "./components/TrackedLink";
 
@@ -9,6 +10,7 @@ export default async function Home() {
   // 首頁「最新文章」區——抓 writing tag 的最新 3 篇。
   // W1 還沒上 tag 時這個 list 會是空的，UI 會自動隱藏該段。
   const latestPosts = await getPosts({ tag: "writing", limit: 3 });
+  const featuredVoices = voices.filter((v) => v.featured);
 
   return (
     <>
@@ -42,10 +44,54 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* ── 回響 ── */}
+      {featuredVoices.length > 0 && (
+        <section className="py-32 border-t border-rule">
+          <div className="mx-auto max-w-5xl px-6">
+            <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase mb-12">
+              回響
+            </p>
+          </div>
+
+          <div className="overflow-x-auto snap-x snap-mandatory scrollbar-hide">
+            <div className="flex gap-8 px-6 sm:px-12 pb-2">
+              {featuredVoices.map((voice) => (
+                <figure
+                  key={voice.id}
+                  className="flex-shrink-0 w-[85%] sm:w-[60%] md:w-[45%] snap-start bg-page border border-rule p-10 sm:p-12 flex flex-col justify-between min-h-[18rem]"
+                >
+                  <blockquote className="text-2xl sm:text-3xl leading-relaxed tracking-[0.03em]">
+                    「{voice.quote}」
+                  </blockquote>
+                  <figcaption className="mt-12 font-sans text-xs tracking-[0.3em] text-ink-soft uppercase">
+                    {voice.name}
+                    <span className="mx-2">·</span>
+                    {voice.age}
+                    <span className="mx-2">·</span>
+                    {voice.occupation}
+                  </figcaption>
+                </figure>
+              ))}
+              {/* 末端留白讓最後一張可貼齊左側 */}
+              <div className="flex-shrink-0 w-1 sm:w-6" aria-hidden />
+            </div>
+          </div>
+
+          <div className="mx-auto max-w-5xl px-6 mt-16 text-right">
+            <Link
+              href="/voices"
+              className="font-sans text-xs tracking-[0.3em] uppercase text-ink-muted hover:text-ink transition-colors border-b border-rule pb-1"
+            >
+              更多回響 →
+            </Link>
+          </div>
+        </section>
+      )}
+
       {/* ── 太曦是什麼 ── */}
       <section className="px-6 py-32 border-t border-rule">
         <div className="mx-auto max-w-2xl">
-          <p className="font-sans text-xs tracking-[0.3em] text-ink-soft uppercase mb-10">
+          <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase mb-10">
             太曦是什麼
           </p>
           <p className="text-lg leading-loose">
@@ -62,7 +108,7 @@ export default async function Home() {
       {/* ── 關於我 ── */}
       <section className="px-6 py-32 border-t border-rule">
         <div className="mx-auto max-w-2xl">
-          <p className="font-sans text-xs tracking-[0.3em] text-ink-soft uppercase mb-10">
+          <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase mb-10">
             關於我
           </p>
           <div className="text-lg leading-loose space-y-2">
@@ -87,7 +133,7 @@ export default async function Home() {
         <section className="px-6 py-32 border-t border-rule">
           <div className="mx-auto max-w-3xl">
             <div className="flex items-baseline justify-between mb-12">
-              <p className="font-sans text-xs tracking-[0.3em] text-ink-soft uppercase">
+              <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase">
                 最新文章
               </p>
               <Link
@@ -109,7 +155,7 @@ export default async function Home() {
       {/* ── 預約入口 ── */}
       <section className="px-6 py-32 border-t border-rule">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="font-sans text-xs tracking-[0.3em] text-ink-soft uppercase mb-10">
+          <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase mb-10">
             如果你準備好了...
           </p>
           <p className="text-lg leading-loose mb-12">

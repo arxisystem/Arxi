@@ -21,10 +21,24 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = await getPost(slug);
   if (!post) return { title: "找不到文章" };
+
+  const title = post.meta_title || post.title;
+  const description =
+    post.meta_description || post.custom_excerpt || post.excerpt || undefined;
+  const url = `/writing/${post.slug}`;
+
   return {
-    title: post.meta_title || post.title,
-    description:
-      post.meta_description || post.custom_excerpt || post.excerpt || undefined,
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description,
+      url,
+      type: "article",
+      publishedTime: post.published_at,
+    },
+    twitter: { title, description },
   };
 }
 

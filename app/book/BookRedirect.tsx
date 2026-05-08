@@ -30,7 +30,7 @@ export function BookRedirect() {
   return (
     <div className="min-h-[60vh] flex items-center justify-center px-6 py-32">
       <div className="text-center max-w-md">
-        <p className="font-sans text-xs tracking-[0.3em] text-ink-soft uppercase mb-12">
+        <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase mb-12">
           預約
         </p>
         <p className="text-2xl tracking-[0.08em] leading-[1.8]">

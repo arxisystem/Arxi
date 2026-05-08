@@ -8,6 +8,13 @@ export const metadata: Metadata = {
   title: "關於",
   description:
     "從數學到音樂，再到身體——張曦昀的轉折，與太曦的核心哲學。",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "關於",
+    description:
+      "從數學到音樂，再到身體——張曦昀的轉折，與太曦的核心哲學。",
+    url: "/about",
+  },
 };
 
 const sections = [
@@ -41,7 +48,7 @@ export default function About() {
   return (
     <article className="mx-auto max-w-2xl px-6 py-24">
       <header className="mb-16">
-        <p className="font-sans text-xs tracking-[0.3em] text-ink-soft uppercase">
+        <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase">
           關於
         </p>
         <h1 className="mt-6 text-4xl tracking-[0.1em] leading-snug">
@@ -64,7 +71,7 @@ export default function About() {
       <div className="space-y-16">
         {sectionsTop.map((section) => (
           <section key={section.label}>
-            <h2 className="font-sans text-xs tracking-[0.3em] text-ink-soft uppercase mb-5">
+            <h2 className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase mb-5">
               {section.label}
             </h2>
             <p className="text-lg leading-loose whitespace-pre-line">{section.body}</p>
@@ -87,7 +94,7 @@ export default function About() {
       <div className="space-y-16">
         {sectionsBottom.map((section) => (
           <section key={section.label}>
-            <h2 className="font-sans text-xs tracking-[0.3em] text-ink-soft uppercase mb-5">
+            <h2 className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase mb-5">
               {section.label}
             </h2>
             <p className="text-lg leading-loose whitespace-pre-line">{section.body}</p>

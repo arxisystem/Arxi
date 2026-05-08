@@ -15,7 +15,7 @@ export function SubscribeForm() {
   if (state.status === "ok") {
     return (
       <div className="border border-rule bg-page p-10 text-center">
-        <p className="font-sans text-xs tracking-[0.3em] text-ink-soft uppercase mb-6">
+        <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase mb-6">
           確認信已寄出
         </p>
         <p className="text-base leading-relaxed">{state.message}</p>
@@ -27,7 +27,7 @@ export function SubscribeForm() {
     <form action={formAction} className="border border-rule bg-page p-10">
       <label
         htmlFor="email"
-        className="block font-sans text-xs tracking-[0.3em] text-ink-soft uppercase mb-4"
+        className="block font-sans text-sm tracking-[0.25em] text-ink-muted uppercase mb-4"
       >
         Email
       </label>

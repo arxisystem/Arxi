@@ -5,6 +5,12 @@ import { PostCard } from "../components/PostCard";
 export const metadata: Metadata = {
   title: "文章",
   description: "關於身體、呼吸，以及那些值得重新看一遍的事。",
+  alternates: { canonical: "/writing" },
+  openGraph: {
+    title: "文章",
+    description: "關於身體、呼吸，以及那些值得重新看一遍的事。",
+    url: "/writing",
+  },
 };
 
 export default async function WritingPage() {
@@ -13,7 +19,7 @@ export default async function WritingPage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-32">
       <header className="mb-20">
-        <p className="font-sans text-xs tracking-[0.3em] text-ink-soft uppercase">
+        <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase">
           文章
         </p>
         <h1 className="mt-6 text-3xl sm:text-4xl tracking-[0.05em] leading-snug">

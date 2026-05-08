@@ -5,6 +5,12 @@ import { PostCard } from "../components/PostCard";
 export const metadata: Metadata = {
   title: "教學",
   description: "網球肘、經絡、急性腎炎——一篇一個身體主題。",
+  alternates: { canonical: "/teaching" },
+  openGraph: {
+    title: "教學",
+    description: "網球肘、經絡、急性腎炎——一篇一個身體主題。",
+    url: "/teaching",
+  },
 };
 
 export default async function TeachingPage() {
@@ -13,7 +19,7 @@ export default async function TeachingPage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-32">
       <header className="mb-20">
-        <p className="font-sans text-xs tracking-[0.3em] text-ink-soft uppercase">
+        <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase">
           教學
         </p>
         <h1 className="mt-6 text-3xl sm:text-4xl tracking-[0.05em] leading-snug">
