@@ -41,10 +41,6 @@ const sections = [
 ];
 
 export default function About() {
-  // 把 5 段切成「前 3 段 → 工作室照打斷 → 後 2 段」的節奏
-  const sectionsTop = sections.slice(0, 3);
-  const sectionsBottom = sections.slice(3);
-
   return (
     <article className="mx-auto max-w-2xl px-6 py-24">
       <header className="mb-16">
@@ -68,33 +64,10 @@ export default function About() {
         }}
       />
 
-      <div className="space-y-16">
-        {sectionsTop.map((section) => (
+      <div className="space-y-20">
+        {sections.map((section) => (
           <section key={section.label}>
-            <h2 className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase mb-5">
-              {section.label}
-            </h2>
-            <p className="text-lg leading-loose whitespace-pre-line">{section.body}</p>
-          </section>
-        ))}
-      </div>
-
-      {/* 工作室空間——前後段內文中間視覺呼吸 */}
-      <div
-        role="img"
-        aria-label="工作室空間"
-        className="aspect-[16/9] my-24 bg-rule"
-        style={{
-          backgroundImage: "url('/images/studio.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
-
-      <div className="space-y-16">
-        {sectionsBottom.map((section) => (
-          <section key={section.label}>
-            <h2 className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase mb-5">
+            <h2 className="font-serif text-3xl tracking-[0.15em] text-ink mb-6">
               {section.label}
             </h2>
             <p className="text-lg leading-loose whitespace-pre-line">{section.body}</p>
