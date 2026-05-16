@@ -3,6 +3,7 @@ import { getPosts } from "@/lib/ghost";
 import { voices } from "@/lib/voices";
 import { PostCard } from "./components/PostCard";
 import { TrackedLink } from "./components/TrackedLink";
+import { VoicesCarousel } from "./components/VoicesCarousel";
 
 const LINE_BOOK_URL = "https://lin.ee/uotrdCX";
 
@@ -53,29 +54,7 @@ export default async function Home() {
             </p>
           </div>
 
-          <div className="overflow-x-auto snap-x snap-mandatory scrollbar-hide">
-            <div className="flex gap-8 px-6 sm:px-12 pb-2">
-              {featuredVoices.map((voice) => (
-                <figure
-                  key={voice.id}
-                  className="flex-shrink-0 w-[85%] sm:w-[60%] md:w-[45%] snap-start bg-page border border-rule p-10 sm:p-12 flex flex-col justify-between min-h-[18rem]"
-                >
-                  <blockquote className="text-2xl sm:text-3xl leading-relaxed tracking-[0.03em]">
-                    「{voice.quote}」
-                  </blockquote>
-                  <figcaption className="mt-12 font-sans text-xs tracking-[0.3em] text-ink-soft uppercase">
-                    {voice.name}
-                    <span className="mx-2">·</span>
-                    {voice.age}
-                    <span className="mx-2">·</span>
-                    {voice.occupation}
-                  </figcaption>
-                </figure>
-              ))}
-              {/* 末端留白讓最後一張可貼齊左側 */}
-              <div className="flex-shrink-0 w-1 sm:w-6" aria-hidden />
-            </div>
-          </div>
+          <VoicesCarousel voices={featuredVoices} />
 
           <div className="mx-auto max-w-5xl px-6 mt-16 text-right">
             <Link

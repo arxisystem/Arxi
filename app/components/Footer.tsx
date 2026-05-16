@@ -9,6 +9,12 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col items-center gap-4 text-base tracking-[0.15em]">
+          <Link
+            href="/subscribe"
+            className="no-underline hover:opacity-60 transition-opacity"
+          >
+            訂閱
+          </Link>
           <a
             href="https://instagram.com/arxi.system"
             target="_blank"
@@ -17,12 +23,12 @@ export function Footer() {
           >
             Instagram　@arxi.system
           </a>
-          <Link
-            href="/subscribe"
+          <a
+            href="mailto:arxi.system@gmail.com"
             className="no-underline hover:opacity-60 transition-opacity"
           >
-            訂閱
-          </Link>
+            合作邀請　arxi.system@gmail.com
+          </a>
         </div>
 
         <div className="text-[11px] tracking-[0.25em] opacity-50 mt-4">
