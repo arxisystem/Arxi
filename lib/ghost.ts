@@ -72,17 +72,38 @@ type PostListOptions = {
   limit?: number;
 };
 
+// 文章排序：在 Ghost 後台給文章掛一般標籤 order-1 / order-2 / …
+// 數字小的排前面；沒掛的排在所有 order 文章之後，照 Ghost 預設（發布日期，新→舊）。
+const ORDER_TAG_RE = /^order-(\d+)$/;
+
+function orderRank(post: GhostPost): number {
+  for (const tag of post.tags ?? []) {
+    const m = ORDER_TAG_RE.exec(tag.slug) || ORDER_TAG_RE.exec(tag.name);
+    if (m) return Number(m[1]);
+  }
+  return Number.POSITIVE_INFINITY;
+}
+
 export async function getPosts(
   opts: PostListOptions = {},
 ): Promise<GhostPost[]> {
   const params: Record<string, string> = {
     include: "tags",
+    // 先抓全部，排序後再 slice——不能在 API 端 limit，
+    // 否則 Ghost 會先用發布日期挑前 N 筆，order 標籤就失效了。
+    limit: "all",
   };
   if (opts.tag) params.filter = `tag:${opts.tag}`;
-  if (opts.limit) params.limit = String(opts.limit);
 
   const data = await ghostFetch<{ posts: GhostPost[] }>("/posts/", params);
-  return data.posts;
+
+  // 穩定排序：order-N 由小到大排最前；其餘維持 Ghost 原本的日期順序。
+  const sorted = data.posts
+    .map((post, i) => ({ post, i, rank: orderRank(post) }))
+    .sort((a, b) => a.rank - b.rank || a.i - b.i)
+    .map((x) => x.post);
+
+  return opts.limit ? sorted.slice(0, opts.limit) : sorted;
 }
 
 export async function getPost(slug: string): Promise<GhostPost | null> {
