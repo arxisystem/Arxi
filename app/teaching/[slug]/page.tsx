@@ -1,12 +1,18 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getPost } from "@/lib/ghost";
+import { getPost, getPosts } from "@/lib/ghost";
 import { PostFooter } from "../../components/PostFooter";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
+
+// 建置時把所有 teaching 文章預先靜態生成（理由同 writing/[slug]）。
+export async function generateStaticParams() {
+  const posts = await getPosts({ tag: "teaching" });
+  return posts.map((post) => ({ slug: post.slug }));
+}
 
 function formatDate(iso: string): string {
   const d = new Date(iso);

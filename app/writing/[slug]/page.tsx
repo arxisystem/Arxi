@@ -1,12 +1,20 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getPost } from "@/lib/ghost";
+import { getPost, getPosts } from "@/lib/ghost";
 import { PostFooter } from "../../components/PostFooter";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
+
+// 建置時把所有 writing 文章預先靜態生成。
+// 這樣每次 Ghost webhook 觸發 Vercel 重建，內頁就會跟列表頁一起重新抓取最新內容。
+// 新文章在下次重建前仍可即時 server-render（dynamicParams 預設為 true）。
+export async function generateStaticParams() {
+  const posts = await getPosts({ tag: "writing" });
+  return posts.map((post) => ({ slug: post.slug }));
+}
 
 function formatDate(iso: string): string {
   const d = new Date(iso);
