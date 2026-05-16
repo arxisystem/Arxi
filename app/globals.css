@@ -40,10 +40,38 @@
 
   body {
     background-color: var(--color-paper);
-    /* 微微的紙纖維紋理 */
-    background-image: url("/paper-texture.svg");
-    background-repeat: repeat;
-    background-blend-mode: multiply;
+    /*
+     * 背景層次（由上而下疊）：
+     * 1. 頂部柔光——一團極淡的暖白，讓視線進站時有「光源」感
+     * 2. 縱向漸層——上方偏亮、中段回到 paper、底部微沉，整頁有空間深度
+     * 3. 紙纖維紋理——保留原本的手感顆粒（multiply 混色）
+     */
+    background-image:
+      /* 1. 亮核——晨光的光源點，從左上方斜射進來 */
+      radial-gradient(
+        44% 30% at 16% 2%,
+        rgba(255, 250, 236, 0.92),
+        rgba(255, 250, 236, 0) 70%
+      ),
+      /* 2. 光暈——從左上光源往右下暈散的大片柔光 */
+      radial-gradient(
+        135% 90% at 6% -6%,
+        rgba(255, 243, 222, 0.55),
+        rgba(255, 243, 222, 0) 60%
+      ),
+      /* 3. 縱向漸層——整頁上下空間深度 */
+      linear-gradient(
+        180deg,
+        #faf5ea 0%,
+        var(--color-paper) 38%,
+        #efe7d4 100%
+      ),
+      /* 4. 紙纖維紋理 */
+      url("/paper-texture.svg");
+    background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+    background-attachment: fixed, fixed, fixed, scroll;
+    background-size: 100% 100%, 100% 100%, 100% 100%, auto;
+    background-blend-mode: normal, normal, normal, multiply;
     color: var(--color-ink);
     font-family: var(--font-serif);
     letter-spacing: 0.02em;

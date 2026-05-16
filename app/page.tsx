@@ -49,9 +49,10 @@ export default async function Home() {
       {featuredVoices.length > 0 && (
         <section className="py-32 border-t border-rule">
           <div className="mx-auto max-w-5xl px-6">
-            <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase mb-12">
+            <h2 className="font-serif text-3xl tracking-[0.15em] text-ink">
               回響
-            </p>
+            </h2>
+            <div className="mt-6 mb-12 w-40 h-px bg-gradient-to-r from-ink-soft to-transparent" aria-hidden />
           </div>
 
           <VoicesCarousel voices={featuredVoices} />
@@ -70,13 +71,14 @@ export default async function Home() {
       {/* ── 太曦是什麼 ── */}
       <section className="px-6 py-32 border-t border-rule">
         <div className="mx-auto max-w-2xl">
-          <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase mb-10">
+          <h2 className="font-serif text-3xl tracking-[0.15em] text-ink">
             太曦是什麼
-          </p>
+          </h2>
+          <div className="mt-6 mb-8 w-40 h-px bg-gradient-to-r from-ink-soft to-transparent" aria-hidden />
           <p className="text-lg leading-loose">
             太曦是一個以呼吸為核心的身心整合品牌。
           </p>
-          <div className="mt-6 text-lg leading-loose text-ink-muted space-y-2">
+          <div className="mt-6 text-lg leading-loose space-y-2">
             <p>我相信，真正帶來安全感的不是放鬆，而是尚未喚醒的原始力量。</p>
             <p>透過徒手調整呼吸，喚醒身體本有的機能，心靈隨之轉化。</p>
             <p>——這裡，是你重新認識自己的起點。</p>
@@ -87,15 +89,16 @@ export default async function Home() {
       {/* ── 關於我 ── */}
       <section className="px-6 py-32 border-t border-rule">
         <div className="mx-auto max-w-2xl">
-          <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase mb-10">
+          <h2 className="font-serif text-3xl tracking-[0.15em] text-ink">
             關於我
-          </p>
+          </h2>
+          <div className="mt-6 mb-8 w-40 h-px bg-gradient-to-r from-ink-soft to-transparent" aria-hidden />
           <div className="text-lg leading-loose space-y-2">
             <p>台大數學、巴黎音樂院、後中醫學系</p>
             <p>去過各式各樣的領域，我追問的始終是同一件事。</p>
             <p>在這過程中，我轉而向內——發現身體與情緒底下，藏著一直在找的答案。</p>
           </div>
-          <p className="mt-6 text-lg leading-loose text-ink-muted">
+          <p className="mt-6 text-lg leading-loose">
             投入身心整合工作五年，太曦，是我走過那條路之後，邀請你一同啟程的起點。
           </p>
           <Link
@@ -111,10 +114,10 @@ export default async function Home() {
       {latestPosts.length > 0 && (
         <section className="px-6 py-32 border-t border-rule">
           <div className="mx-auto max-w-3xl">
-            <div className="flex items-baseline justify-between mb-12">
-              <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase">
+            <div className="flex items-baseline justify-between mb-5">
+              <h2 className="font-serif text-3xl tracking-[0.15em] text-ink">
                 最新文章
-              </p>
+              </h2>
               <Link
                 href="/writing"
                 className="font-sans text-xs tracking-[0.25em] text-ink-muted hover:text-ink transition-colors"
@@ -122,6 +125,7 @@ export default async function Home() {
                 全部 →
               </Link>
             </div>
+            <div className="mb-12 w-40 h-px bg-gradient-to-r from-ink-soft to-transparent" aria-hidden />
             <div>
               {latestPosts.map((post) => (
                 <PostCard key={post.id} post={post} section="writing" />
@@ -134,9 +138,10 @@ export default async function Home() {
       {/* ── 預約入口 ── */}
       <section className="px-6 py-32 border-t border-rule">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase mb-10">
-            如果你準備好了...
-          </p>
+          <h2 className="font-serif text-3xl tracking-[0.15em] text-ink">
+            如果你準備好了⋯
+          </h2>
+          <div className="mx-auto mt-6 mb-10 w-48 h-px bg-gradient-to-r from-transparent via-ink-soft to-transparent" aria-hidden />
           <p className="text-lg leading-loose mb-12">
             這是一對一的過程
             <br /><br />
