@@ -11,6 +11,7 @@ export function VoicesCarousel({ voices }: Props) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const dragStart = useRef({ x: 0, scrollLeft: 0, dragged: false });
+  const animRef = useRef<number | null>(null);
   const [canLeft, setCanLeft] = useState(false);
   const [canRight, setCanRight] = useState(true);
 
@@ -38,7 +39,33 @@ export function VoicesCarousel({ voices }: Props) {
     const step = card
       ? (card as HTMLElement).offsetWidth + 32 // gap-8 = 32px
       : el.clientWidth * 0.6;
-    el.scrollBy({ left: step * dir, behavior: "smooth" });
+
+    // 自訂緩動捲動——比原生 smooth 更溫和、可控時間。
+    // easeInOutCubic：起步柔、中段順、收尾緩。
+    if (animRef.current !== null) cancelAnimationFrame(animRef.current);
+    const start = el.scrollLeft;
+    const max = el.scrollWidth - el.clientWidth;
+    const target = Math.max(0, Math.min(max, start + step * dir));
+    const distance = target - start;
+    if (distance === 0) return;
+
+    const duration = 1100; // ms
+    // easeOutQuad：一按就起步（無 ease-in），但起步速度比 cubic 溫和，
+    // 整段更平緩、緩緩減速停下
+    const ease = (t: number) => 1 - (1 - t) * (1 - t);
+    let startTime: number | null = null;
+
+    const tick = (now: number) => {
+      if (startTime === null) startTime = now;
+      const p = Math.min(1, (now - startTime) / duration);
+      el.scrollLeft = start + distance * ease(p);
+      if (p < 1) {
+        animRef.current = requestAnimationFrame(tick);
+      } else {
+        animRef.current = null;
+      }
+    };
+    animRef.current = requestAnimationFrame(tick);
   };
 
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -46,6 +73,10 @@ export function VoicesCarousel({ voices }: Props) {
     if (e.button !== 0) return;
     const el = scrollRef.current;
     if (!el) return;
+    if (animRef.current !== null) {
+      cancelAnimationFrame(animRef.current);
+      animRef.current = null;
+    }
     setIsDragging(true);
     dragStart.current = {
       x: e.clientX,
