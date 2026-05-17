@@ -49,10 +49,10 @@ export function VoicesCarousel({ voices }: Props) {
     const distance = target - start;
     if (distance === 0) return;
 
-    const duration = 1100; // ms
-    // easeOutQuad：一按就起步（無 ease-in），但起步速度比 cubic 溫和，
-    // 整段更平緩、緩緩減速停下
-    const ease = (t: number) => 1 - (1 - t) * (1 - t);
+    const duration = 950; // ms
+    // easeOutSine：按下瞬間就以接近全速起步（無 ease-in），
+    // 中段速度相對均勻，接近定點才柔和減速停下
+    const ease = (t: number) => Math.sin((t * Math.PI) / 2);
     let startTime: number | null = null;
 
     const tick = (now: number) => {
@@ -141,7 +141,7 @@ export function VoicesCarousel({ voices }: Props) {
         onPointerUp={onPointerUp}
         onPointerCancel={onPointerUp}
         onClickCapture={onClickCapture}
-        className={`overflow-x-auto snap-x snap-mandatory scrollbar-hide scroll-smooth ${
+        className={`overflow-x-auto snap-x snap-mandatory scrollbar-hide ${
           isDragging ? "cursor-grabbing select-none" : "cursor-grab"
         }`}
         style={{ touchAction: "pan-x" }}
