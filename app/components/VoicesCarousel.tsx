@@ -11,7 +11,6 @@ export function VoicesCarousel({ voices }: Props) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const dragStart = useRef({ x: 0, scrollLeft: 0, dragged: false });
-  const animRef = useRef<number | null>(null);
   const [canLeft, setCanLeft] = useState(false);
   const [canRight, setCanRight] = useState(true);
 
@@ -32,51 +31,20 @@ export function VoicesCarousel({ voices }: Props) {
     };
   }, []);
 
+  // 用瀏覽器原生平滑捲動——它本來就跟 scroll-snap 協調運作，
+  // 不要再手刻 rAF（會跟 snap 互打，造成「卡住→瞬間跳」）。
   const stepBy = (dir: 1 | -1) => {
     const el = scrollRef.current;
     if (!el) return;
-    const card = el.querySelector("figure");
-    const step = card
-      ? (card as HTMLElement).offsetWidth + 32 // gap-8 = 32px
-      : el.clientWidth * 0.6;
-
-    // 自訂緩動捲動——比原生 smooth 更溫和、可控時間。
-    // easeInOutCubic：起步柔、中段順、收尾緩。
-    if (animRef.current !== null) cancelAnimationFrame(animRef.current);
-    const start = el.scrollLeft;
-    const max = el.scrollWidth - el.clientWidth;
-    const target = Math.max(0, Math.min(max, start + step * dir));
-    const distance = target - start;
-    if (distance === 0) return;
-
-    const duration = 950; // ms
-    // easeOutSine：按下瞬間就以接近全速起步（無 ease-in），
-    // 中段速度相對均勻，接近定點才柔和減速停下
-    const ease = (t: number) => Math.sin((t * Math.PI) / 2);
-    let startTime: number | null = null;
-
-    const tick = (now: number) => {
-      if (startTime === null) startTime = now;
-      const p = Math.min(1, (now - startTime) / duration);
-      el.scrollLeft = start + distance * ease(p);
-      if (p < 1) {
-        animRef.current = requestAnimationFrame(tick);
-      } else {
-        animRef.current = null;
-      }
-    };
-    animRef.current = requestAnimationFrame(tick);
+    const card = el.querySelector("figure") as HTMLElement | null;
+    const step = card ? card.offsetWidth + 32 : el.clientWidth * 0.8; // gap-8
+    el.scrollBy({ left: step * dir, behavior: "smooth" });
   };
 
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    // 只用主鍵（左鍵 / 觸控筆 tip）拖
-    if (e.button !== 0) return;
+    if (e.button !== 0) return; // 只用主鍵拖
     const el = scrollRef.current;
     if (!el) return;
-    if (animRef.current !== null) {
-      cancelAnimationFrame(animRef.current);
-      animRef.current = null;
-    }
     setIsDragging(true);
     dragStart.current = {
       x: e.clientX,
@@ -103,7 +71,7 @@ export function VoicesCarousel({ voices }: Props) {
     }
   };
 
-  // 防止拖曳結束時誤觸點擊事件（雖然現在卡片無連結，預留好習慣）
+  // 拖曳結束時吞掉誤觸的點擊
   const onClickCapture = (e: React.MouseEvent) => {
     if (dragStart.current.dragged) {
       e.preventDefault();
