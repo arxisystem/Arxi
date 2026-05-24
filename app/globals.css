@@ -9,6 +9,16 @@
   --color-ink-soft: #a89a85;
   --color-rule: #d8cfb8;
 
+  /*
+   * Dark-mode tokens — Body Mirror（/practice /admin /login）專用。
+   * 在那些頁的元件用 `dark:bg-paper-dark` 等變體，由 system preference 自動切換。
+   * 現有 arxi.tw 頁未使用 dark: 變體，所以維持 light only、不受影響。
+   */
+  --color-paper-dark: #1a1612;
+  --color-ink-dark: #ebe5d6;
+  --color-ink-muted-dark: #8f8472;
+  --color-rule-dark: #2d2620;
+
   /* Fonts: Noto Serif TC for body, Noto Sans TC for nav/UI */
   --font-serif: var(--font-noto-serif-tc), "Noto Serif TC", "Songti TC",
     "PingFang TC", serif;

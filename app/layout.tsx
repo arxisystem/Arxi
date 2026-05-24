@@ -1,9 +1,23 @@
 import type { Metadata } from "next";
 import { Noto_Serif_TC, Noto_Sans_TC } from "next/font/google";
+import { headers } from "next/headers";
 import "./globals.css";
 import { Nav } from "./components/Nav";
 import { Footer } from "./components/Footer";
 import { Analytics } from "./components/Analytics";
+
+/**
+ * Body Mirror（/login /practice /admin）是獨立 app，不該顯示 arxi.tw 主站的 Nav/Footer。
+ * middleware.ts 把當前 pathname 寫進 `x-pathname` header；這裡讀來判斷渲染哪種 layout。
+ */
+const BODY_MIRROR_PREFIXES = ["/login", "/practice", "/admin"];
+
+function isBodyMirrorRoute(pathname: string | null): boolean {
+  if (!pathname) return false;
+  return BODY_MIRROR_PREFIXES.some(
+    (p) => pathname === p || pathname.startsWith(`${p}/`),
+  );
+}
 
 const notoSerifTC = Noto_Serif_TC({
   weight: ["400", "500", "600", "700"],
@@ -54,21 +68,34 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = (await headers()).get("x-pathname");
+  const bodyMirror = isBodyMirrorRoute(pathname);
+
   return (
     <html
       lang="zh-Hant"
       className={`${notoSerifTC.variable} ${notoSansTC.variable}`}
     >
       <body className="min-h-screen flex flex-col">
-        <Nav />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <Analytics />
+        {bodyMirror ? (
+          // Body Mirror：裸 body、不渲染主站 Nav/Footer。Analytics 仍保留（追蹤所有頁）。
+          <>
+            {children}
+            <Analytics />
+          </>
+        ) : (
+          <>
+            <Nav />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <Analytics />
+          </>
+        )}
       </body>
     </html>
   );

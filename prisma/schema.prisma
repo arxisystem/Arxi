@@ -1,0 +1,259 @@
+// Body Mirror — schema 嚴格照 spec §5。
+// 修改前先回 PJ-BodyMirror.md 對齊。
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ── NextAuth 標準 tables ──
+
+model User {
+  id            String     @id @default(cuid())
+  name          String?
+  email         String     @unique
+  emailVerified DateTime?
+  image         String?
+  role          Role       @default(CLIENT)
+  status        UserStatus @default(PENDING) // admin 需 approve 才變 ACTIVE
+
+  // 分享偏好——新寫 entry 時兩個 checkbox 的預設值（仍可逐次覆寫）
+  defaultShareWithAdmin     Boolean @default(false)
+  defaultShareWithCommunity Boolean @default(false)
+
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  accounts          Account[]
+  sessions          Session[]
+  entries           Entry[]
+  practices         Practice[]
+  dailyGuidances    DailyGuidanceAssignment[] @relation("UserDailyGuidance")
+  weeklyReviews     WeeklyReview[]            @relation("UserWeeklyReviews")
+  feedbacksGiven    EntryFeedback[]           @relation("FeedbackByAdmin")
+  guidancesAssigned DailyGuidanceAssignment[] @relation("AssignedByAdmin")
+}
+
+enum Role {
+  CLIENT
+  ADMIN
+}
+
+enum UserStatus {
+  PENDING  // 剛 OAuth 完、admin 還沒 approve
+  ACTIVE   // 付費客、可用全部功能
+  PAUSED   // 暫停（套票結束、未續、不主動推銷）
+  ARCHIVED // 不再使用
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ── Body Mirror 核心 tables ──
+
+model Entry {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // 這篇日記是「哪一天」的紀錄。
+  // 跟 createdAt（寫入時間）解耦——讓使用者可以補昨天、寫前天。
+  entryDate DateTime @db.Date @default(now())
+
+  // 滑桿值 1-10
+  breathValue   Int? // 卡住 ←→ 流動
+  bodyValue     Int? // 撐著 ←→ 鬆開
+  presenceValue Int? // 沉 ←→ 輕
+
+  // 開放文字
+  notesShape  String? @db.Text // 今天身體有什麼想說的？
+  notesMoment String? @db.Text // 今天什麼時候撐著、什麼時候鬆開了？
+
+  // v2: 引導 / 觀察焦點
+  guidanceId         String?
+  guidance           Guidance? @relation(fields: [guidanceId], references: [id], onDelete: SetNull)
+  guidanceReflection String?   @db.Text // 關於今天的觀察焦點，你發現了什麼？
+
+  // v2: 身體傾向（陰陽 / 方向）——客戶端只看 tag、admin 端可統計推論
+  // 純字串陣列：往上提 / 往下沉 / 往外衝 / 往內縮 / 發熱 / 發冷 / 空 / 滿 / 說不上來
+  bodyDirectionTags String[] @default([])
+
+  // tag 多選（既有 join table）
+  entryTags EntryTag[]
+
+  // v2: 太曦回饋（一對多）
+  feedbacks EntryFeedback[]
+
+  // 隱私 / 分享（兩層獨立勾選）
+  shareWithAdmin     Boolean @default(false) // 勾了太曦才能在 session 時打開看
+  shareWithCommunity Boolean @default(false) // 勾了會匿名出現在其他個案的「今日的分享」
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId, createdAt])
+  @@index([entryDate])
+  @@index([shareWithCommunity, entryDate])
+}
+
+model Tag {
+  id       String      @id @default(cuid())
+  name     String      @unique // 如「肩頸」「胸口」「呼吸卡住」「撐著」
+  category TagCategory
+  order    Int         @default(0) // 顯示順序
+  active   Boolean     @default(true)
+
+  entries EntryTag[]
+}
+
+enum TagCategory {
+  BODY_LOCATION  // 肩頸 / 胸口 / 頭 / 腰 / 胃 / 背
+  BREATH_QUALITY // 卡住 / 很淺 / 很急 / 很沉 / 比較穩 / 說不上來
+  STATE          // 撐著 / 鬆開 / 焦躁 / 沉重 / 流動
+}
+
+model EntryTag {
+  entryId String
+  tagId   String
+  entry   Entry  @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  tag     Tag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([entryId, tagId])
+}
+
+// 今日練習（admin 指派、客戶完成）
+model Practice {
+  id          String       @id @default(cuid())
+  userId      String
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type        PracticeType
+  title       String       // 如「呼吸：吐氣比吸氣長」
+  description String?      @db.Text
+  durationMin Int?         // 3 / 5 / 10 分鐘標示
+
+  // v2: 穴道練習專用欄位（type=ACUPOINT 才用，其他 type 留 null）
+  acupointName      String?  // 例：內關 / 合谷 / 太衝 / 足三里
+  side              String?  // 左 / 右 / 雙側
+  observationPrompt String?  @db.Text // 按完後觀察什麼
+
+  // 指派 / 完成
+  assignedDate DateTime  @default(now())
+  completedAt  DateTime? // null = 未完成
+
+  // 客戶完成後可寫一句感受
+  completionNote String? @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId, assignedDate])
+}
+
+enum PracticeType {
+  BREATH         // 呼吸練習
+  OBSERVATION    // 身體觀察
+  MOVEMENT       // 動作練習
+  STILLNESS      // 靜坐 / 停下
+  STRETCH        // 伸展
+  ACUPOINT       // v2: 穴道按壓
+  WRITING        // v2: 書寫練習
+}
+
+// ── v2 新增：引導 / 回饋 / 週回顧 ──
+
+// Guidance：太曦的「今日引導」模板庫——一句邀請性的觀察焦點。
+// admin 後台可建/編；當天 admin 沒手動指派時，系統從 isActive=true 池中隨機抽一個指派。
+model Guidance {
+  id        String   @id @default(cuid())
+  title     String   // 短標（admin 自己辨識用）
+  content   String   @db.Text // 客戶端會看到的那句話
+  category  String?  // 自由分類，例「呼吸觀察」「情境觀察」「身體部位」
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  dailyAssignments DailyGuidanceAssignment[]
+  entries          Entry[]
+}
+
+// 每天每個客戶會被指派一條 guidance。
+// 由 admin 主動指派（assignedByAdminId 填 admin user id），或系統 fallback 隨機抽（NULL）。
+model DailyGuidanceAssignment {
+  id                String   @id @default(cuid())
+  userId            String
+  guidanceId        String
+  date              DateTime @db.Date
+  assignedByAdminId String? // null = 系統隨機抽
+  createdAt         DateTime @default(now())
+
+  user     User     @relation("UserDailyGuidance", fields: [userId], references: [id], onDelete: Cascade)
+  guidance Guidance @relation(fields: [guidanceId], references: [id], onDelete: Cascade)
+  admin    User?    @relation("AssignedByAdmin", fields: [assignedByAdminId], references: [id], onDelete: SetNull)
+
+  @@unique([userId, date])
+  @@index([userId, date])
+}
+
+// 太曦針對特定 entry 寫的回饋——客戶端會看到。
+model EntryFeedback {
+  id        String    @id @default(cuid())
+  entryId   String
+  adminId   String
+  message   String    @db.Text
+  createdAt DateTime  @default(now())
+  readAt    DateTime? // 客戶開過就標記
+
+  entry Entry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  admin User  @relation("FeedbackByAdmin", fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@index([entryId])
+}
+
+// 客戶端的週回顧——每週一次。
+// weekStart 為該週的週一（@db.Date）。
+model WeeklyReview {
+  id               String   @id @default(cuid())
+  userId           String
+  weekStart        DateTime @db.Date
+
+  bodyReminder     String?  @db.Text // 這週身體最常提醒你的是什麼？
+  holdingMoment    String?  @db.Text // 這週你最常在什麼時候撐住？
+  earlierAwareness String?  @db.Text // 這週哪一次你有比以前早一點看見自己？
+  nextPractice     String?  @db.Text // 下週你想練習什麼？
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation("UserWeeklyReviews", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, weekStart])
+  @@index([userId, weekStart])
+}
