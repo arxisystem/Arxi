@@ -95,7 +95,15 @@ export async function getPosts(
   };
   if (opts.tag) params.filter = `tag:${opts.tag}`;
 
-  const data = await ghostFetch<{ posts: GhostPost[] }>("/posts/", params);
+  let data: { posts: GhostPost[] };
+  try {
+    data = await ghostFetch<{ posts: GhostPost[] }>("/posts/", params);
+  } catch (e) {
+    // Ghost 不可用（網路掛、Railway 維護、額度爆掉、500…）→ 回空陣列，
+    // 讓列表頁照樣 render「尚無文章」、不要把整站拖垮。
+    console.error("[ghost] getPosts failed:", e);
+    return [];
+  }
 
   // 穩定排序：order-N 由小到大排最前；其餘維持 Ghost 原本的日期順序。
   const sorted = data.posts
@@ -107,6 +115,8 @@ export async function getPosts(
 }
 
 export async function getPost(slug: string): Promise<GhostPost | null> {
+  // 任何失敗（404 / 500 / Ghost 連不上）都回 null。
+  // 上游頁面會走 notFound()——比 500 好，且 Ghost 復活後文章自動回來。
   try {
     const data = await ghostFetch<{ posts: GhostPost[] }>(
       `/posts/slug/${slug}/`,
@@ -114,8 +124,8 @@ export async function getPost(slug: string): Promise<GhostPost | null> {
     );
     return data.posts[0] ?? null;
   } catch (e) {
-    if (e instanceof Error && e.message.includes("404")) return null;
-    throw e;
+    console.error(`[ghost] getPost(${slug}) failed:`, e);
+    return null;
   }
 }
 
@@ -126,7 +136,7 @@ export async function getPage(slug: string): Promise<GhostPage | null> {
     );
     return data.pages[0] ?? null;
   } catch (e) {
-    if (e instanceof Error && e.message.includes("404")) return null;
-    throw e;
+    console.error(`[ghost] getPage(${slug}) failed:`, e);
+    return null;
   }
 }
