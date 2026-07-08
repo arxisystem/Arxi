@@ -152,10 +152,10 @@ export default function BeforePage() {
           </section>
         ))}
 
-        {/* 費用——結構化排版 */}
+        {/* 陪伴方式——結構化排版；價格已隱藏、透過 LINE 詢問 */}
         <section>
           <h2 className="font-sans font-medium text-xl tracking-[0.05em] leading-relaxed mb-8">
-            費用
+            陪伴方式
           </h2>
           <div className="space-y-10">
             {pricing.map((p) => (
@@ -176,9 +176,9 @@ export default function BeforePage() {
                   )}
                   {p.title}
                 </h3>
-                {/* 單位 + 價格（右側） */}
+                {/* 單位（右側，價格已隱藏、透過 LINE 詢問） */}
                 <span className="font-sans text-xs tracking-[0.15em] text-ink-muted text-right">
-                  {p.unit} · {p.price}
+                  {p.unit}
                 </span>
                 {/* 描述（橫跨後兩欄） */}
                 <span />
@@ -209,7 +209,9 @@ export default function BeforePage() {
             ))}
           </div>
           <p className="mt-10 text-base leading-loose text-ink-muted">
-            初次體驗後我們再一起討論方向。
+            費用歡迎透過 LINE 詢問。
+            <br />
+            初次體驗後，我們再一起討論適合你的方向。
           </p>
         </section>
       </div>
