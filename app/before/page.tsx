@@ -6,12 +6,12 @@ const LINE_BOOK_URL = "https://lin.ee/uotrdCX";
 export const metadata: Metadata = {
   title: "初次來之前",
   description:
-    "第一次踏進一個陌生的空間，總有很多問號。這裡先幫你回答幾個最常見的。",
+    "第一次踏進一個陌生的空間，總有很多問號。以下是常見的問題，來之前可以先了解一下。",
   alternates: { canonical: "/before" },
   openGraph: {
     title: "初次來之前",
     description:
-      "第一次踏進一個陌生的空間，總有很多問號。這裡先幫你回答幾個最常見的。",
+      "第一次踏進一個陌生的空間，總有很多問號。以下是常見的問題，來之前可以先了解一下。",
     url: "/before",
   },
 };
@@ -156,7 +156,7 @@ export default function BeforePage() {
         </h1>
         <p className="mt-8 text-base leading-loose text-ink-muted whitespace-pre-line">
           {`第一次踏進一個陌生的空間，總有很多問號。
-這裡先幫你回答幾個最常見的。`}
+以下是常見的問題，來之前可以先了解一下。`}
         </p>
       </header>
 
