@@ -148,7 +148,7 @@ const pricing: {
 export default function BeforePage() {
   return (
     <article className="mx-auto max-w-2xl px-6 py-24">
-      <header className="mb-20">
+      <header className="mb-16">
         <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase">
           初次來之前
         </p>
@@ -160,6 +160,18 @@ export default function BeforePage() {
 這裡先幫你回答幾個最常見的。`}
         </p>
       </header>
+
+      {/* 工作室主視覺——header 之後、Q&A 之前 */}
+      <div
+        role="img"
+        aria-label="太曦工作室"
+        className="aspect-[3/2] mb-20 bg-rule"
+        style={{
+          backgroundImage: "url('/images/studio-main.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
 
       <div className="space-y-20">
         {qa.map((item) => (
