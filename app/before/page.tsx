@@ -71,14 +71,14 @@ const qa: { q: string; a: string }[] = [
 
 方法上長期投入以下幾套身心整合系統：
 
-· Be Activated ── 神經肌肉活化系統
-· Somatic Experiencing ── 創傷身體療癒
-· Feldenkrais ── 動作再教育
-· Body-Mind Centering ── 身心動能學
-· Applied Kinesiology ── 應用肌動學
-· Internal Family Systems ── 內在家庭系統
+· Be Activated
+· Somatic Experiencing
+· Feldenkrais
+· Body-Mind Centering
+· Applied Kinesiology
+· Internal Family Systems
 
-陪伴個案五年，累計超過 300 位個案、超過 1,000 次一對一工作。
+投入身心工作五年，累計超過 300 位個案、超過 1,000 次一對一工作。
 年齡從二十多歲到七十歲以上，職業從上班族、老師、護理師、工程師到神職人員都有——不同身體、不同故事的人都走過這裡。
 
 持續在做、持續在學。`,
@@ -121,7 +121,7 @@ const pricing: {
   {
     numeral: "II",
     title: "呼吸課程",
-    unit: "3 次陪伴",
+    unit: "3 堂",
     price: "NT$ 10,000",
     desc: "開始學習看見自己的身體，建立日常呼吸與觀察習慣。",
     fitFor: "開始想認識自己的人 · 建立呼吸與身體覺察的人",
@@ -129,8 +129,8 @@ const pricing: {
   },
   {
     numeral: "III",
-    title: "身體重組陪伴",
-    unit: "6 次陪伴",
+    title: "身體重組",
+    unit: "6 堂",
     price: "NT$ 18,000",
     desc: "給身體一段時間，慢慢建立新的反應方式。",
     fitFor: "想深入整理長期狀態的人 · 想慢慢重新認識身體如何運作的人",
@@ -176,7 +176,7 @@ export default function BeforePage() {
         {/* 陪伴方式——結構化排版；價格已隱藏、透過 LINE 詢問 */}
         <section>
           <h2 className="font-sans font-medium text-xl tracking-[0.05em] leading-relaxed mb-8">
-            陪伴方式
+            合作方式
           </h2>
           <div className="space-y-10">
             {pricing.map((p) => (
