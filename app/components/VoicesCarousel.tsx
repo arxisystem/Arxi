@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { Voice } from "@/lib/voices";
 
@@ -116,21 +117,25 @@ export function VoicesCarousel({ voices }: Props) {
       >
         <div className="flex gap-8 px-6 sm:px-12 py-4">
           {voices.map((voice) => (
-            <figure
+            <Link
               key={voice.id}
-              className="flex-shrink-0 w-[85%] sm:w-[60%] md:w-[45%] snap-start bg-page border border-rule shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-10 sm:p-12 flex flex-col justify-between min-h-[18rem]"
+              href={`/voices#${voice.id}`}
+              aria-label={`閱讀 ${voice.name} 的完整故事`}
+              className="flex-shrink-0 w-[75%] sm:w-[48%] md:w-[33%] snap-start group"
             >
-              <blockquote className="text-2xl sm:text-3xl leading-relaxed tracking-[0.03em] select-none">
-                「{voice.quote}」
-              </blockquote>
-              <figcaption className="mt-12 font-sans text-xs tracking-[0.3em] text-ink-soft uppercase select-none">
-                {voice.name}
-                <span className="mx-2">·</span>
-                {voice.age}
-                <span className="mx-2">·</span>
-                {voice.occupation}
-              </figcaption>
-            </figure>
+              <figure className="h-full bg-page border border-rule shadow-md group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-300 p-8 sm:p-10 flex flex-col justify-between min-h-[18rem]">
+                <blockquote className="text-xl sm:text-2xl leading-relaxed tracking-[0.03em] select-none">
+                  「{voice.quote}」
+                </blockquote>
+                <figcaption className="mt-10 font-sans text-xs tracking-[0.3em] text-ink-soft uppercase select-none">
+                  {voice.name}
+                  <span className="mx-2">·</span>
+                  {voice.age}
+                  <span className="mx-2">·</span>
+                  {voice.occupation}
+                </figcaption>
+              </figure>
+            </Link>
           ))}
           {/* 末端留白讓最後一張可貼齊左側 */}
           <div className="flex-shrink-0 w-1 sm:w-6" aria-hidden />

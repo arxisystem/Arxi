@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function VoicesPage() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-32">
+    <div className="mx-auto max-w-3xl px-6 py-16 sm:py-24 md:py-32">
       <header className="mb-24">
         <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase">
           回響
@@ -34,7 +34,7 @@ export default function VoicesPage() {
       ) : (
         <div className="space-y-32">
           {voices.map((voice) => (
-            <article key={voice.id}>
+            <article key={voice.id} id={voice.id} className="scroll-mt-24">
               <p className="text-lg leading-loose whitespace-pre-line">
                 {voice.story}
               </p>
