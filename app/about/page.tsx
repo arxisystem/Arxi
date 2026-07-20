@@ -81,7 +81,7 @@ export default function About() {
           event="book_click_about"
           className="font-sans text-xs tracking-[0.3em] uppercase bg-ink text-paper px-8 py-3 text-center hover:opacity-85 transition-opacity"
         >
-          預約初次諮詢
+          預約初次體驗
         </TrackedLink>
         <Link
           href="/writing"

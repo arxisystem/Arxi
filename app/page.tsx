@@ -32,13 +32,16 @@ export default async function Home() {
             <h1 className="font-serif font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-[0.05em] leading-[1.35] text-paper whitespace-nowrap">
               安全不是放鬆，是力量。
             </h1>
+            <p className="mt-5 sm:mt-7 mx-auto max-w-md sm:max-w-xl font-serif font-light text-sm sm:text-base md:text-lg tracking-[0.1em] leading-loose text-paper/80">
+              一對一的身心工作　·　透過徒手與呼吸，喚醒身體本有的力量。
+            </p>
             <div className="mt-10 sm:mt-12">
               <TrackedLink
                 href={LINE_BOOK_URL}
                 event="book_click_hero"
                 className="font-sans text-sm tracking-[0.3em] uppercase text-paper hover:opacity-70 transition-opacity border-b border-paper/50 pb-1"
               >
-                預約初次諮詢 →
+                預約初次體驗 →
               </TrackedLink>
             </div>
           </div>
@@ -156,7 +159,7 @@ export default async function Home() {
             event="book_click_hero"
             className="inline-block font-sans text-sm tracking-[0.3em] uppercase bg-ink text-paper px-10 py-4 hover:opacity-85 transition-opacity"
           >
-            預約初次諮詢
+            預約初次體驗
           </TrackedLink>
 
         </div>

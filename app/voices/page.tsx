@@ -55,7 +55,7 @@ export default function VoicesPage() {
                   }}
                   className="inline-block font-sans text-sm tracking-[0.3em] uppercase bg-ink text-paper px-10 py-4 hover:opacity-85 transition-opacity"
                 >
-                  預約初次諮詢
+                  預約初次體驗
                 </TrackedLink>
               </div>
             </article>

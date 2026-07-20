@@ -39,7 +39,7 @@ export function BookRedirect() {
           aria-hidden
         />
         <p className="mt-10 text-lg leading-loose">
-          透過 LINE 預約初次諮詢。
+          透過 LINE 預約初次體驗。
           <br />
           一對一、安靜、慢。
         </p>
