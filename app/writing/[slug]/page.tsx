@@ -57,7 +57,7 @@ export default async function WritingPostPage({ params }: PageProps) {
   if (!post) notFound();
 
   return (
-    <article className="mx-auto max-w-2xl px-6 py-24">
+    <article className="mx-auto max-w-2xl px-6 py-16 sm:py-20 md:py-24">
       <Link
         href="/writing"
         className="font-sans text-xs tracking-[0.3em] text-ink-muted hover:text-ink uppercase transition-colors"

@@ -17,7 +17,7 @@ export default async function WritingPage() {
   const posts = await getPosts({ tag: "writing" });
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-32">
+    <div className="mx-auto max-w-3xl px-6 py-16 sm:py-24 md:py-32">
       <header className="mb-20">
         <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase">
           文章

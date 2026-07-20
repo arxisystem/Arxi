@@ -29,7 +29,7 @@ export function BookRedirect() {
   }, []);
 
   return (
-    <div className="min-h-[60vh] flex items-center justify-center px-6 py-32">
+    <div className="min-h-[60vh] flex items-center justify-center px-6 py-16 sm:py-24 md:py-32">
       <div className="text-center max-w-md">
         <h1 className="font-serif text-3xl tracking-[0.15em] text-ink">
           加入太曦

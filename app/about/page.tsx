@@ -42,7 +42,7 @@ const sections = [
 
 export default function About() {
   return (
-    <article className="mx-auto max-w-2xl px-6 py-24">
+    <article className="mx-auto max-w-2xl px-6 py-16 sm:py-20 md:py-24">
       <header className="mb-16">
         <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase">
           關於

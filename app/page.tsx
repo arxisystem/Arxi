@@ -53,7 +53,7 @@ export default async function Home() {
 
       {/* ── 回響 ── */}
       {featuredVoices.length > 0 && (
-        <section className="py-32 border-t border-rule">
+        <section className="py-16 sm:py-24 md:py-32 border-t border-rule">
           <div className="mx-auto max-w-5xl px-6">
             <h2 className="font-serif text-3xl tracking-[0.15em] text-ink">
               回響
@@ -75,7 +75,7 @@ export default async function Home() {
       )}
 
       {/* ── 太曦是什麼 ── */}
-      <section className="px-6 py-32 border-t border-rule">
+      <section className="px-6 py-16 sm:py-24 md:py-32 border-t border-rule">
         <div className="mx-auto max-w-2xl">
           <h2 className="font-serif text-3xl tracking-[0.15em] text-ink">
             太曦是什麼
@@ -93,7 +93,7 @@ export default async function Home() {
       </section>
 
       {/* ── 太曦適合誰 ── */}
-      <section className="px-6 py-32 border-t border-rule">
+      <section className="px-6 py-16 sm:py-24 md:py-32 border-t border-rule">
         <div className="mx-auto max-w-2xl">
           <h2 className="font-serif text-3xl tracking-[0.15em] text-ink">
             太曦適合誰
@@ -150,7 +150,7 @@ export default async function Home() {
       </section>
 
       {/* ── 關於我 ── */}
-      <section className="px-6 py-32 border-t border-rule">
+      <section className="px-6 py-16 sm:py-24 md:py-32 border-t border-rule">
         <div className="mx-auto max-w-2xl">
           <h2 className="font-serif text-3xl tracking-[0.15em] text-ink">
             關於我
@@ -175,7 +175,7 @@ export default async function Home() {
 
       {/* ── 最新文章 ── */}
       {latestPosts.length > 0 && (
-        <section className="px-6 py-32 border-t border-rule">
+        <section className="px-6 py-16 sm:py-24 md:py-32 border-t border-rule">
           <div className="mx-auto max-w-3xl">
             <div className="flex items-baseline justify-between mb-5">
               <h2 className="font-serif text-3xl tracking-[0.15em] text-ink">
@@ -199,7 +199,7 @@ export default async function Home() {
       )}
 
       {/* ── 預約入口 ── */}
-      <section className="px-6 py-32 border-t border-rule">
+      <section className="px-6 py-16 sm:py-24 md:py-32 border-t border-rule">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-serif text-3xl tracking-[0.15em] text-ink">
             如果你準備好了⋯
