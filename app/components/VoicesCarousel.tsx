@@ -43,7 +43,8 @@ export function VoicesCarousel({ voices }: Props) {
   };
 
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (e.button !== 0) return; // 只用主鍵拖
+    // 觸控裝置交給瀏覽器原生橫向捲動，避免輕微手指位移吞掉卡片點擊。
+    if (e.pointerType !== "mouse" || e.button !== 0) return;
     const el = scrollRef.current;
     if (!el) return;
     setIsDragging(true);
@@ -52,7 +53,6 @@ export function VoicesCarousel({ voices }: Props) {
       scrollLeft: el.scrollLeft,
       dragged: false,
     };
-    el.setPointerCapture(e.pointerId);
   };
 
   const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -60,7 +60,12 @@ export function VoicesCarousel({ voices }: Props) {
     const el = scrollRef.current;
     if (!el) return;
     const dx = e.clientX - dragStart.current.x;
-    if (Math.abs(dx) > 3) dragStart.current.dragged = true;
+    if (Math.abs(dx) > 5 && !dragStart.current.dragged) {
+      dragStart.current.dragged = true;
+      // 只有確認正在拖曳後才捕捉指標；一般點擊仍會落在 Link 上。
+      el.setPointerCapture(e.pointerId);
+    }
+    if (!dragStart.current.dragged) return;
     el.scrollLeft = dragStart.current.scrollLeft - dx;
   };
 
@@ -70,6 +75,10 @@ export function VoicesCarousel({ voices }: Props) {
     if (el && el.hasPointerCapture(e.pointerId)) {
       el.releasePointerCapture(e.pointerId);
     }
+    // 保留到緊接著的 click 事件處理完，再清除拖曳狀態。
+    window.setTimeout(() => {
+      dragStart.current.dragged = false;
+    }, 0);
   };
 
   // 拖曳結束時吞掉誤觸的點擊

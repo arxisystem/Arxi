@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>太曦 Arxi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400&family=Noto+Serif+TC:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: "Noto Serif TC", serif;
+  color: #2b2016;
+  background: #F5EFE2;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.page {
+  width: 210mm;
+  height: 297mm;
+  padding: 10mm 20mm 7mm;
+  background: #F5EFE2;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ------- Top mark ------- */
+.mark {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 6.5pt;
+  font-weight: 300;
+  letter-spacing: 0.42em;
+  color: #8a7c66;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 4mm;
+  border-bottom: 0.4pt solid #d8cfb8;
+}
+
+/* ------- Hero — compact masthead ------- */
+.hero { margin-top: 3mm; text-align: center; }
+.hero .masthead {
+  font-family: "Noto Serif TC", serif;
+  font-weight: 400;
+  font-size: 15pt;
+  letter-spacing: 0.32em;
+  line-height: 1;
+  color: #1f160c;
+  padding-left: 0.32em;
+}
+.hero .masthead .arxi {
+  font-family: "Noto Sans TC", sans-serif;
+  font-weight: 300;
+  font-size: 10pt;
+  letter-spacing: 0.5em;
+  color: #8a7c66;
+  padding-left: 0.2em;
+}
+.hero .sub {
+  font-family: "Noto Serif TC", serif;
+  font-weight: 300;
+  font-size: 11pt;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+  color: #3a2e22;
+  margin: 4mm auto 0;
+  max-width: 155mm;
+}
+.hero .bio-line {
+  font-family: "Noto Sans TC", sans-serif;
+  font-weight: 300;
+  font-size: 7.5pt;
+  line-height: 1.8;
+  letter-spacing: 0.08em;
+  color: #6b5f4a;
+  margin: 3mm auto 0;
+  max-width: 160mm;
+}
+
+/* ------- Rule ------- */
+.rule {
+  width: 22mm;
+  height: 0.4pt;
+  background: #b8a98c;
+  margin: 4mm auto 4mm;
+}
+
+/* ------- Section eyebrow ------- */
+.eyebrow {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 7.5pt;
+  font-weight: 400;
+  letter-spacing: 0.42em;
+  color: #8a7c66;
+  text-transform: uppercase;
+  margin-bottom: 3.5mm;
+}
+
+/* ------- Content sections ------- */
+section { margin-top: 3mm; }
+section:first-of-type { margin-top: 0; }
+
+.fit-for ul,
+.first-visit ol {
+  list-style: none;
+  padding: 0;
+}
+
+/* 適合誰 bullets */
+.fit-for li {
+  font-family: "Noto Serif TC", serif;
+  font-weight: 300;
+  font-size: 10pt;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  color: #2b2016;
+  padding: 0.3mm 0;
+  padding-left: 6mm;
+  position: relative;
+}
+.fit-for li::before {
+  content: "·";
+  position: absolute;
+  left: 1mm;
+  top: -0.5mm;
+  font-family: "Noto Sans TC", sans-serif;
+  color: #a89a80;
+  font-size: 12pt;
+}
+
+/* 第一次會發生什麼 — numbered steps */
+.first-visit ol { counter-reset: step; }
+.first-visit li {
+  counter-increment: step;
+  font-family: "Noto Serif TC", serif;
+  font-weight: 300;
+  font-size: 10pt;
+  line-height: 1.65;
+  letter-spacing: 0.04em;
+  color: #2b2016;
+  padding: 0.5mm 0;
+  padding-left: 8mm;
+  position: relative;
+}
+.first-visit li::before {
+  content: counter(step);
+  position: absolute;
+  left: 1mm;
+  top: 1.2mm;
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 8pt;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: #a89a80;
+}
+.first-visit .step-title {
+  font-family: "Noto Serif TC", serif;
+  font-weight: 500;
+  font-size: 10pt;
+  letter-spacing: 0.12em;
+  color: #1f160c;
+  margin-right: 3mm;
+}
+.first-visit .note {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 8pt;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  color: #8a7c66;
+  margin-top: 2mm;
+  padding-left: 8mm;
+}
+
+.diff p {
+  font-family: "Noto Serif TC", serif;
+  font-weight: 300;
+  font-size: 10pt;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  color: #2b2016;
+  max-width: 165mm;
+}
+
+/* ------- Plans ------- */
+.plans .row {
+  display: grid;
+  grid-template-columns: 6mm 1fr auto;
+  gap: 4mm;
+  align-items: baseline;
+  padding: 1.5mm 0;
+  border-bottom: 0.25pt solid #e0d5b8;
+}
+.plans .row:last-child { border-bottom: none; }
+.plans .num {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 8pt;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  color: #a89a80;
+}
+.plans .title {
+  font-family: "Noto Serif TC", serif;
+  font-weight: 400;
+  font-size: 11pt;
+  letter-spacing: 0.15em;
+  color: #1f160c;
+}
+.plans .meta {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 8.5pt;
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  color: #4a3f30;
+  white-space: nowrap;
+}
+.plans .price {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 8.5pt;
+  font-weight: 400;
+  color: #1f160c;
+  margin-left: 3mm;
+}
+.plans .via-line {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 8pt;
+  font-weight: 300;
+  color: #8a7c66;
+  margin-left: 3mm;
+}
+
+/* ------- Voices ------- */
+.voices .quote {
+  margin-top: 2.5mm;
+}
+.voices .quote:first-child { margin-top: 0; }
+.voices .quote p {
+  font-family: "Noto Serif TC", serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 10pt;
+  line-height: 1.75;
+  letter-spacing: 0.06em;
+  color: #2b2016;
+}
+.voices .attr {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 7pt;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: #8a7c66;
+  text-transform: uppercase;
+  text-align: right;
+  margin-top: 1mm;
+}
+
+/* ------- Notes ------- */
+.notes .items {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 8.5pt;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  color: #4a3f30;
+  line-height: 1.9;
+}
+.notes .items strong { font-weight: 400; color: #1f160c; }
+.notes .comfort {
+  font-family: "Noto Serif TC", serif;
+  font-weight: 300;
+  font-size: 9.5pt;
+  line-height: 1.9;
+  letter-spacing: 0.05em;
+  color: #4a3f30;
+  margin-top: 3mm;
+}
+
+/* ------- Bottom divider ------- */
+.divider-bottom {
+  width: 22mm;
+  height: 0.4pt;
+  background: #b8a98c;
+  margin: 3.5mm auto 3mm;
+}
+
+/* ------- Closing ------- */
+.closing {
+  text-align: center;
+}
+.closing p {
+  font-family: "Noto Serif TC", serif;
+  font-weight: 300;
+  font-size: 10pt;
+  line-height: 1.95;
+  letter-spacing: 0.06em;
+  color: #2b2016;
+  max-width: 150mm;
+  margin: 0 auto;
+}
+
+/* ------- Footer with QR ------- */
+.footer {
+  margin-top: auto;
+  padding-top: 4mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8mm;
+}
+.footer .qr {
+  width: 16mm;
+  height: 16mm;
+  flex: 0 0 auto;
+}
+.footer .qr svg { width: 100%; height: 100%; display: block; }
+.footer .contact {
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 7.5pt;
+  font-weight: 300;
+  letter-spacing: 0.28em;
+  color: #4a3f30;
+  line-height: 1.9;
+  text-transform: uppercase;
+}
+.footer .contact .qr-label {
+  font-size: 6.5pt;
+  letter-spacing: 0.3em;
+  color: #8a7c66;
+  display: block;
+  margin-top: 1mm;
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="mark">
+    <span>太曦　Arxi</span>
+    <span>身心調息</span>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="masthead">太曦　<span class="arxi">Arxi</span></div>
+    <p class="sub">
+      一對一的身心工作 ── 透過徒手與呼吸，喚醒身體本有的力量。
+    </p>
+    <p class="bio-line">
+      張曦昀主理　·　台大數學系　·　巴黎音樂院　·　中國醫藥大學後中醫學系
+      <br>
+      Be Activated　·　Somatic Experiencing　·　Feldenkrais　·　Body-Mind Centering　·　陪伴個案五年
+    </p>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- 適合誰 -->
+  <section class="fit-for">
+    <div class="eyebrow">適合誰</div>
+    <ul>
+      <li>長期在某處緊繃或疼痛，看過很多方式都沒真正解掉。</li>
+      <li>想試點不一樣的，但不想被靈性語言帶走。</li>
+      <li>感覺情緒跟身體有連動，卻說不清楚。</li>
+      <li>正在轉折期，想給自己一段時間重新認識身體。</li>
+    </ul>
+  </section>
+
+  <!-- 第一次會發生什麼 -->
+  <section class="first-visit">
+    <div class="eyebrow">第一次會發生什麼</div>
+    <ol>
+      <li><span class="step-title">訪談</span>聊聊你為什麼來、身體最近有什麼訊號。</li>
+      <li><span class="step-title">評估</span>看目前的身體狀態、哪裡在代償。</li>
+      <li><span class="step-title">徒手工作</span>透過徒手引導呼吸，喚醒身體。</li>
+      <li><span class="step-title">總結</span>整理今天的觀察，帶回家的練習。</li>
+    </ol>
+    <p class="note">全程約 90 – 120 分鐘</p>
+  </section>
+
+  <!-- 與其他工作的不同 -->
+  <section class="diff">
+    <div class="eyebrow">與其他工作的不同</div>
+    <p>
+      整復、按摩、物理治療、心理諮商各有專業與位置。太曦走的路徑不太一樣——不做結構調整、不做放鬆按壓，也不用對話探索。透過徒手觸碰引導呼吸，喚醒身體本有的活動與感知，讓改變從你自己身上發生。
+    </p>
+  </section>
+
+  <!-- 陪伴方式 -->
+  <section class="plans">
+    <div class="eyebrow">陪伴方式</div>
+    <div class="row">
+      <span class="num">I</span>
+      <span class="title">初次深度體驗</span>
+      <span class="meta">90 分鐘<span class="price">　·　NT$ 3,500</span></span>
+    </div>
+    <div class="row">
+      <span class="num">II</span>
+      <span class="title">單次深度工作</span>
+      <span class="meta">90 分鐘<span class="via-line">　·　費用洽 LINE</span></span>
+    </div>
+    <div class="row">
+      <span class="num">III</span>
+      <span class="title">完整歷程</span>
+      <span class="meta">90 分鐘 × 6 堂<span class="via-line">　·　費用洽 LINE</span></span>
+    </div>
+  </section>
+
+  <!-- 回響 -->
+  <section class="voices">
+    <div class="eyebrow">回響</div>
+    <div class="quote">
+      <p>「現在手臂可以直舉靠著耳朵，原本連靠近耳朵都有困難。」</p>
+      <p class="attr">Enoch　·　60　·　護理師</p>
+    </div>
+    <div class="quote">
+      <p>「在脫離名為不安的挾持後，我多了選擇。」</p>
+      <p class="attr">Syuan　·　36　·　行政職</p>
+    </div>
+  </section>
+
+  <!-- 前來須知 -->
+  <section class="notes">
+    <div class="eyebrow">前來須知</div>
+    <p class="items">
+      <strong>台中北屯</strong>（預約確認後告知確切地址）　·　寬鬆衣物　·　避免牛仔褲或裙子　·　自備水壺
+    </p>
+    <p class="comfort">一對一為主，如需陪伴者在場請事前告訴我；任何不舒服都可以隨時暫停。</p>
+  </section>
+
+  <div class="divider-bottom"></div>
+
+  <!-- 收束 -->
+  <section class="closing">
+    <p>
+      不是每個人都適合太曦。<br>
+      如果你願意慢下來，重新認識自己的身體，歡迎開始這段旅程。
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="qr">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" shape-rendering="crispEdges"><path stroke="#1f160c" d="M0 0.5h7m2 0h4m2 0h1m2 0h7M0 1.5h1m5 0h1m1 0h1m1 0h1m2 0h4m1 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m2 0h1m2 0h1m1 0h2m2 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m3 0h1m1 0h1m1 0h1m3 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h1m3 0h1m2 0h1m2 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m2 0h1m1 0h1m3 0h2m1 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M10 7.5h2m1 0h1m1 0h2M0 8.5h1m1 0h1m1 0h1m1 0h1m2 0h1m2 0h2m6 0h1m2 0h1M1 9.5h2m1 0h1m5 0h4m2 0h3m5 0h1M1 10.5h1m1 0h2m1 0h1m1 0h3m1 0h1m7 0h1m1 0h3M1 11.5h3m4 0h2m1 0h1m1 0h1m2 0h1m3 0h1m2 0h1M0 12.5h2m2 0h1m1 0h1m1 0h1m2 0h1m3 0h4m2 0h1m1 0h2M3 13.5h2m2 0h3m1 0h1m1 0h1m3 0h2m2 0h1m2 0h1M0 14.5h1m1 0h3m1 0h2m1 0h2m2 0h2m2 0h1m1 0h1m2 0h3M1 15.5h1m2 0h1m2 0h3m1 0h1m1 0h6m1 0h1m2 0h1M0 16.5h1m1 0h1m2 0h3m4 0h1m3 0h6M8 17.5h1m1 0h3m1 0h3m3 0h2m1 0h2M0 18.5h7m2 0h1m1 0h2m1 0h3m1 0h1m1 0h2m1 0h2M0 19.5h1m5 0h1m3 0h1m1 0h2m2 0h1m3 0h2m1 0h2M0 20.5h1m1 0h3m1 0h1m1 0h2m1 0h1m2 0h1m1 0h6m1 0h2M0 21.5h1m1 0h3m1 0h1m2 0h1m1 0h1m5 0h1m1 0h4M0 22.5h1m1 0h3m1 0h1m1 0h1m1 0h1m2 0h1m1 0h2m3 0h1m3 0h1M0 23.5h1m5 0h1m4 0h1m3 0h2m1 0h1m1 0h2m1 0h1M0 24.5h7m1 0h2m2 0h1m2 0h2m2 0h1m3 0h2"/></svg>
+    </div>
+    <div class="contact">
+      ARXI.TW<br>
+      IG @ARXI.SYSTEM<br>
+      <span class="qr-label">LINE 加好友 →</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
