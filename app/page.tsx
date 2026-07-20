@@ -45,7 +45,7 @@ export default async function Home() {
               </TrackedLink>
             </div>
             <p className="mt-6 sm:mt-8 font-sans text-[10px] sm:text-xs tracking-[0.32em] uppercase text-paper/55">
-              台中北屯　·　一對一　·　90 分鐘
+              台中北屯　·　一對一　·　2 小時
             </p>
           </div>
         </div>
