@@ -213,6 +213,8 @@ export default async function Home() {
             可能會有不適，可能會有挑戰。
             <br /><br />
             但那往往是身體開始說話的時候——你聽到了嗎？
+            <br /><br />
+            我們會一起看見全新的世界。
           </p>
           <TrackedLink
             href={LINE_BOOK_URL}
