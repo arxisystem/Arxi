@@ -92,6 +92,63 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* ── 太曦適合誰 ── */}
+      <section className="px-6 py-32 border-t border-rule">
+        <div className="mx-auto max-w-2xl">
+          <h2 className="font-serif text-3xl tracking-[0.15em] text-ink">
+            太曦適合誰
+          </h2>
+          <div className="mt-6 mb-12 w-40 h-px bg-gradient-to-r from-ink-soft to-transparent" aria-hidden />
+
+          <ol className="space-y-12">
+            <li className="grid grid-cols-[2em_1fr] gap-4 sm:gap-6 items-baseline">
+              <span className="font-sans text-xs tracking-[0.25em] text-ink-soft uppercase">I</span>
+              <div>
+                <h3 className="font-serif text-xl tracking-[0.1em] text-ink mb-3">
+                  身體反覆不舒服
+                </h3>
+                <p className="text-lg leading-loose text-ink">
+                  身體某處反覆痠痛、緊繃，或說不上來的長期不對——想從別的角度好好認識自己的身體。
+                </p>
+              </div>
+            </li>
+            <li className="grid grid-cols-[2em_1fr] gap-4 sm:gap-6 items-baseline">
+              <span className="font-sans text-xs tracking-[0.25em] text-ink-soft uppercase">II</span>
+              <div>
+                <h3 className="font-serif text-xl tracking-[0.1em] text-ink mb-3">
+                  系統性的失調
+                </h3>
+                <p className="text-lg leading-loose text-ink">
+                  長期睡不好、自律神經失調、消化不順、婦科問題反覆——想從整體看身體，不只處理單一症狀。
+                </p>
+              </div>
+            </li>
+            <li className="grid grid-cols-[2em_1fr] gap-4 sm:gap-6 items-baseline">
+              <span className="font-sans text-xs tracking-[0.25em] text-ink-soft uppercase">III</span>
+              <div>
+                <h3 className="font-serif text-xl tracking-[0.1em] text-ink mb-3">
+                  心裡的重量
+                </h3>
+                <p className="text-lg leading-loose text-ink">
+                  創傷、麻木、沒有動力、精疲力盡——想找到面對風暴的方式，重新長回有力量的自己。
+                </p>
+              </div>
+            </li>
+            <li className="grid grid-cols-[2em_1fr] gap-4 sm:gap-6 items-baseline">
+              <span className="font-sans text-xs tracking-[0.25em] text-ink-soft uppercase">IV</span>
+              <div>
+                <h3 className="font-serif text-xl tracking-[0.1em] text-ink mb-3">
+                  為自己而來
+                </h3>
+                <p className="text-lg leading-loose text-ink">
+                  想聽懂身體的語言，或正在探索身心的奧秘、追問生命的真理——想找一個能一起走一段的方式。
+                </p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
       {/* ── 關於我 ── */}
       <section className="px-6 py-32 border-t border-rule">
         <div className="mx-auto max-w-2xl">
