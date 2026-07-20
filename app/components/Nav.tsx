@@ -4,7 +4,7 @@ const navLinks = [
   { href: "/about", label: "關於" },
   { href: "/writing", label: "文章" },
   { href: "/voices", label: "回響" },
-  { href: "/before", label: "行前" },
+  { href: "/before", label: "Q&A" },
   { href: "/book", label: "預約" },
   { href: "/teaching", label: "教學" },
   { href: "/subscribe", label: "訂閱" },
