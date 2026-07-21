@@ -33,7 +33,7 @@ export default async function Home() {
               安全不是放鬆，是力量。
             </h1>
             <p className="mt-5 sm:mt-7 mx-auto max-w-md sm:max-w-xl font-serif font-light text-sm sm:text-base md:text-lg tracking-[0.1em] leading-loose text-paper/80">
-              一對一的身心工作　·　透過徒手與呼吸，喚醒身體本有的力量。
+              透過徒手工作調整呼吸，喚醒身體本有的力量。
             </p>
             <div className="mt-10 sm:mt-12">
               <TrackedLink
@@ -44,9 +44,6 @@ export default async function Home() {
                 預約初次體驗 →
               </TrackedLink>
             </div>
-            <p className="mt-6 sm:mt-8 font-sans text-[10px] sm:text-xs tracking-[0.32em] uppercase text-paper/55">
-              台中北屯　·　一對一　·　2 小時
-            </p>
           </div>
         </div>
       </section>

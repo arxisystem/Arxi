@@ -14,13 +14,6 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
-function formatDate(iso: string): string {
-  const d = new Date(iso);
-  return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(
-    d.getDate(),
-  ).padStart(2, "0")}`;
-}
-
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
@@ -65,11 +58,8 @@ export default async function TeachingPostPage({ params }: PageProps) {
 
       <header className="mt-12 mb-16">
         <div className="font-sans text-xs tracking-[0.25em] text-ink-soft uppercase">
-          <time dateTime={post.published_at}>
-            {formatDate(post.published_at)}
-          </time>
           {post.reading_time > 0 && (
-            <span className="ml-3">{post.reading_time} 分鐘閱讀</span>
+            <span>{post.reading_time} 分鐘閱讀</span>
           )}
         </div>
         <h1 className="mt-6 text-3xl sm:text-4xl tracking-[0.05em] leading-snug">
