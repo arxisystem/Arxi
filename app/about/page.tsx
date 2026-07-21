@@ -52,6 +52,18 @@ export default function About() {
         </h1>
       </header>
 
+      <section className="mb-20 border-y border-rule py-10">
+        <p className="text-lg leading-loose text-ink-muted">
+          太曦是一套以徒手工作與呼吸引導為核心的身心工作方法，協助人重新感受身體，整理長期形成的張力與發力模式。
+        </p>
+        <Link
+          href="/method"
+          className="inline-block mt-6 font-sans text-xs tracking-[0.3em] uppercase text-ink-muted hover:text-ink transition-colors border-b border-rule pb-1"
+        >
+          了解太曦的方法 →
+        </Link>
+      </section>
+
       {/* 創辦人肖像——header 之後、內文之前 */}
       <div
         role="img"

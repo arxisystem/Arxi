@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 const navLinks = [
+  { href: "/method", label: "方法" },
   { href: "/about", label: "關於" },
   { href: "/writing", label: "文章" },
   { href: "/voices", label: "回響" },

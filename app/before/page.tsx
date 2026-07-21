@@ -155,10 +155,7 @@ export default function BeforePage() {
   return (
     <article className="mx-auto max-w-2xl px-6 py-16 sm:py-20 md:py-24">
       <header className="mb-16">
-        <p className="font-sans text-sm tracking-[0.25em] text-ink-muted uppercase">
-          初次來之前
-        </p>
-        <h1 className="mt-6 font-sans font-light text-4xl tracking-[0.05em] leading-snug">
+        <h1 className="font-sans font-light text-4xl tracking-[0.05em] leading-snug">
           初次來之前
         </h1>
         <p className="mt-8 text-base leading-loose text-ink-muted whitespace-pre-line">
